@@ -43,6 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/pBar"
             android:layout_alignStart="@+id/pBar"
+            android:textColor="@color/black"
             app:layout_constraintTop_toBottomOf="@+id/pBar"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
