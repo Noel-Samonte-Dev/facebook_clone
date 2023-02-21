@@ -73,11 +73,128 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <LinearLayout
+        android:id="@+id/post_counts_layout"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        android:background="@drawable/black_border"
+        app:layout_constraintTop_toBottomOf="@+id/post_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/like_count"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="1"
+                android:textSize="11sp"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:background="@android:color/transparent"
+                android:textAllCaps="false" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="Like"
+                android:layout_marginStart="5dp"
+                android:textSize="11sp"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:background="@android:color/transparent"
+                android:textAllCaps="false" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/comment_count"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="1"
+                android:textSize="11sp"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:background="@android:color/transparent"
+                android:textAllCaps="false" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="Comment"
+                android:layout_marginStart="5dp"
+                android:textSize="11sp"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:background="@android:color/transparent"
+                android:textAllCaps="false"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/share_count"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="1"
+                android:textSize="11sp"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:background="@android:color/transparent"
+                android:textAllCaps="false"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="Share"
+                android:layout_marginStart="5dp"
+                android:textSize="11sp"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:background="@android:color/transparent"
+                android:textAllCaps="false"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
         android:background="@drawable/black_border"
-        app:layout_constraintTop_toBottomOf="@+id/post_image"
+        app:layout_constraintTop_toBottomOf="@+id/post_counts_layout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
         

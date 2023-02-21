@@ -5,10 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.facebook_clone.R;
+import com.example.facebook_clone.profile_page;
+
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -56,17 +61,41 @@ public class post_adapter extends RecyclerView.Adapter<post_adapter.post_adapter
 
     class post_adapter_view_holder extends RecyclerView.ViewHolder {
 
-        private TextView name, date, post_desc;
+        private TextView name, date, post_desc, like_count, share_count, comment_count;
         private ImageView post_image;
         private CircleImageView profile_image;
+        private LinearLayout post_counts_layout;
         post_adapter_view_holder(@NonNull View itemView) {
             super(itemView);
-
-            name = itemView.findViewById(R.id.name);
             date = itemView.findViewById(R.id.date);
             post_desc = itemView.findViewById(R.id.post_desc);
             post_image = itemView.findViewById(R.id.post_image);
             profile_image = itemView.findViewById(R.id.profile_image);
+            profile_image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FragmentManager manager = ((AppCompatActivity) context).getSupportFragmentManager();
+                    manager.beginTransaction()
+                            .add(R.id.fragmentContainerView, new profile_page())
+                            .addToBackStack(null).commit();
+
+                }
+            });
+
+            name = itemView.findViewById(R.id.name);
+            name.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FragmentManager manager = ((AppCompatActivity) context).getSupportFragmentManager();
+                    manager.beginTransaction()
+                            .add(R.id.fragmentContainerView, new profile_page())
+                            .addToBackStack(null).commit();
+                }
+            });
+
+            like_count = itemView.findViewById(R.id.like_count);
+            share_count = itemView.findViewById(R.id.share_count);
+            comment_count = itemView.findViewById(R.id.comment_count);
         }
     }
 }

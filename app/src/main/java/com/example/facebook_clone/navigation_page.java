@@ -3,10 +3,12 @@ package com.example.facebook_clone;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentContainerView;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -24,6 +26,20 @@ public class navigation_page extends AppCompatActivity {
 
         nav_bottom = findViewById(R.id.nav_bottom);
         nav_bottom.setOnItemSelectedListener(nav_listener);
+
+        FragmentContainerView fr = findViewById(R.id.fragmentContainerView);
+        fr.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View view, int i, int i1, int i2, int i3, int i4, int i5, int i6, int i7) {
+                if (fr.getFragment().toString().contains("home_page") || fr.getFragment().toString().contains("NavHostFragment")) {
+                    nav_bottom.getMenu().getItem(0).setChecked(true);
+                }
+
+                if (fr.getFragment().toString().contains("profile_page")) {
+                    nav_bottom.getMenu().getItem(1).setChecked(true);
+                }
+            }
+        });
     }
 
     private final NavigationBarView.OnItemSelectedListener nav_listener = new NavigationBarView.OnItemSelectedListener() {
