@@ -7,8 +7,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.facebook_clone.R;
+import com.example.facebook_clone.profile_page;
+
 import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -61,6 +65,16 @@ public class stories_adapter extends RecyclerView.Adapter<stories_adapter.storie
 
             name = itemView.findViewById(R.id.name);
             post_image = itemView.findViewById(R.id.story_img);
+            post_image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FragmentManager manager = ((AppCompatActivity) context).getSupportFragmentManager();
+                    manager.beginTransaction()
+                            .add(R.id.fragmentContainerView, new profile_page())
+                            .addToBackStack(null).commit();
+                }
+            });
+
             profile_image = itemView.findViewById(R.id.profile_image);
         }
     }
