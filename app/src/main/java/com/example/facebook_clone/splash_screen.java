@@ -1,6 +1,7 @@
 package com.example.facebook_clone;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Bundle;
 import android.widget.ProgressBar;
@@ -40,9 +41,18 @@ public class splash_screen extends AppCompatActivity {
                 }
 
                 if (i == 100) {
-                    Intent intent = new Intent(splash_screen.this, login_page.class);
-                    startActivity(intent);
-                    finish();
+                    SharedPreferences sp = getSharedPreferences("Profile", MODE_PRIVATE);
+                    String login_id = sp.getString("login_id", "");
+
+                    if (login_id.trim().isEmpty()) {
+                        Intent intent = new Intent(splash_screen.this, login_page.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Intent intent = new Intent(splash_screen.this, navigation_page.class);
+                        startActivity(intent);
+                        finish();
+                    }
                 }
             }
         }).start();

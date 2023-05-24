@@ -1,6 +1,9 @@
 package com.example.facebook_clone.stories_model;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +51,7 @@ public class stories_adapter extends RecyclerView.Adapter<stories_adapter.storie
         holder.post_image.setImageResource(currentItem.getPost());
         holder.profile_image.setImageResource(currentItem.getDp());
         holder.name.setText(currentItem.getName());
+        holder.user_id_tv.setText(currentItem.getUser_id());
     }
 
     @Override
@@ -57,17 +61,23 @@ public class stories_adapter extends RecyclerView.Adapter<stories_adapter.storie
 
     class stories_model_view_holder extends RecyclerView.ViewHolder {
 
-        private TextView name;
+        private TextView name, user_id_tv;
         private ImageView post_image;
         private CircleImageView profile_image;
         stories_model_view_holder(@NonNull View itemView) {
             super(itemView);
 
+            user_id_tv = itemView.findViewById(R.id.user_id_tv);
             name = itemView.findViewById(R.id.name);
             post_image = itemView.findViewById(R.id.story_img);
             post_image.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    SharedPreferences sp = context.getSharedPreferences("Profile", MODE_PRIVATE);
+                    String login_id = sp.getString("login_id", "");
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.putString("selected_id", user_id_tv.getText().toString().trim());
+                    editor.commit();
                     FragmentManager manager = ((AppCompatActivity) context).getSupportFragmentManager();
                     manager.beginTransaction()
                             .add(R.id.fragmentContainerView, new profile_page())

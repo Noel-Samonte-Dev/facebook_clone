@@ -10,28 +10,46 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
+import com.example.facebook_clone.Database.DBhelper;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class login_page extends AppCompatActivity {
     private AppCompatButton login_btn;
     private TextInputEditText login_username_text_field, login_pw_text_field;
+    DBhelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_page);
+        login_username_text_field = findViewById(R.id.login_username_text_field);
+        login_pw_text_field = findViewById(R.id.login_pw_text_field);
+        db = new DBhelper(this);
 
         login_btn = findViewById(R.id.login_btn);
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(login_page.this, navigation_page.class);
-                startActivity(intent);
-                finish();
+                String username = login_username_text_field.getText().toString();
+                String password = login_pw_text_field.getText().toString();
+                boolean is_login_success = db.checkLogin(getApplicationContext(), username, password);
+                if (is_login_success) {
+                    Toast toast = Toast.makeText(getApplicationContext(),"Successfully Logged In.",Toast.LENGTH_SHORT);
+                    toast.show();
+
+                    Intent intent = new Intent(login_page.this, navigation_page.class);
+                    startActivity(intent);
+                    finish();
+
+                } else {
+                    Toast toast = Toast.makeText(getApplicationContext(),"Username or Password is incorrect.",Toast.LENGTH_SHORT);
+                    toast.show();
+                }
             }
         });
 
@@ -52,9 +70,6 @@ public class login_page extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        login_username_text_field = findViewById(R.id.login_username_text_field);
-        login_pw_text_field = findViewById(R.id.login_pw_text_field);
 
         getKeyboardEvent(login_username_text_field);
         getKeyboardEvent(login_pw_text_field);

@@ -3,9 +3,10 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        maven { url "https://oss.jfrog.org/artifactory/oss-snapshot-local" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.3.1'
+        classpath 'com.android.tools.build:gradle:7.4.1'
         classpath 'com.google.gms:google-services:4.3.15'
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -14,8 +15,8 @@ buildscript {
 }
 
 plugins {
-    id 'com.android.application' version '7.3.1' apply false
-    id 'com.android.library' version '7.3.1' apply false
+    id 'com.android.application' version '7.4.1' apply false
+    id 'com.android.library' version '7.4.1' apply false
 }
 
 allprojects {

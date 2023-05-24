@@ -1,6 +1,7 @@
 package com.example.facebook_clone;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -51,6 +52,11 @@ public class navigation_page extends AppCompatActivity {
                     setFragment(new home_page(), "home_page");
                     return true;
                 case R.id.profile_page:
+                    SharedPreferences sp = getSharedPreferences("Profile", MODE_PRIVATE);
+                    String login_id = sp.getString("login_id", "");
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.putString("selected_id", login_id);
+                    editor.commit();
                     setFragment(new profile_page(), "profile_page");
                     return true;
                 case R.id.settings_page:

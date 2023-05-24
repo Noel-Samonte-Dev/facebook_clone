@@ -11,9 +11,4 @@
         android:title="Profile"
         android:icon="@drawable/ic_profile" />
 
-    <item
-        android:id="@+id/settings_page"
-        android:title="Logout"
-        android:icon="@drawable/ic_logout" />
-
 </menu>

@@ -1,6 +1,9 @@
 package com.example.facebook_clone.post_model;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,6 +55,7 @@ public class post_adapter extends RecyclerView.Adapter<post_adapter.post_adapter
         holder.name.setText(currentItem.getName());
         holder.date.setText(currentItem.getDate());
         holder.post_desc.setText(currentItem.getDescription());
+        holder.user_id_tv.setText(currentItem.getUser_id());
     }
 
     @Override
@@ -61,13 +65,14 @@ public class post_adapter extends RecyclerView.Adapter<post_adapter.post_adapter
 
     class post_adapter_view_holder extends RecyclerView.ViewHolder {
 
-        private TextView name, date, post_desc, like_count, share_count, comment_count;
+        private TextView name, date, post_desc, like_count, share_count, comment_count, user_id_tv;
         private ImageView post_image;
         private CircleImageView profile_image;
         private LinearLayout post_counts_layout;
         private Button like_btn, comment_btn, share_btn;
         post_adapter_view_holder(@NonNull View itemView) {
             super(itemView);
+            user_id_tv = itemView.findViewById(R.id.user_id_tv);
             post_counts_layout = itemView.findViewById(R.id.post_counts_layout);
             date = itemView.findViewById(R.id.date);
             post_desc = itemView.findViewById(R.id.post_desc);
@@ -76,6 +81,12 @@ public class post_adapter extends RecyclerView.Adapter<post_adapter.post_adapter
             profile_image.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    SharedPreferences sp = context.getSharedPreferences("Profile", MODE_PRIVATE);
+                    String login_id = sp.getString("login_id", "");
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.putString("selected_id", user_id_tv.getText().toString().trim());
+                    editor.commit();
+
                     FragmentManager manager = ((AppCompatActivity) context).getSupportFragmentManager();
                     manager.beginTransaction()
                             .add(R.id.fragmentContainerView, new profile_page())
@@ -88,6 +99,12 @@ public class post_adapter extends RecyclerView.Adapter<post_adapter.post_adapter
             name.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    SharedPreferences sp = context.getSharedPreferences("Profile", MODE_PRIVATE);
+                    String login_id = sp.getString("login_id", "");
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.putString("selected_id", user_id_tv.getText().toString().trim());
+                    editor.commit();
+
                     FragmentManager manager = ((AppCompatActivity) context).getSupportFragmentManager();
                     manager.beginTransaction()
                             .add(R.id.fragmentContainerView, new profile_page())
